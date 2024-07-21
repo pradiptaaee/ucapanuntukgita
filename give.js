@@ -3,21 +3,8 @@ const lagu = document.getElementById('lagu');
 const teksbottom = document.querySelector('.teks-bottom');
 const link =document.getElementById('link')
 
-function fullLayar() {
-    var elem = document.documentElement;
 
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) {
-        /* Safari */
-        elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) {
-        /* IE11 */
-        elem.msRequestFullscreen();
-    }
-}
 
-fullLayar();
 
 function playlagu(){
     lagu.play()
@@ -35,14 +22,26 @@ function playvideo() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    
+    fullLayar();
     const pages = document.querySelectorAll('.page');
     const cover = document.querySelector('.cover');
     const btnOpen = document.getElementById('btn-open');
     const link = document.getElementById('link'); // Pastikan Anda memiliki elemen dengan ID 'link'
     let currentPage = 0;
 
-    
+    function fullLayar() {
+    var elem = document.documentElement;
+
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) {
+        /* Safari */
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+        /* IE11 */
+        elem.msRequestFullscreen();
+    }
+}
 
     function showPage(index) {
         pages.forEach((page, i) => {
