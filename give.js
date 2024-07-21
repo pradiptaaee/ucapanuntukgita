@@ -15,8 +15,9 @@ function fullLayar() {
         /* IE11 */
         elem.msRequestFullscreen();
     }
-
 }
+
+fullLayar();
 
 function playlagu(){
     lagu.play()
@@ -34,11 +35,14 @@ function playvideo() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    fullLayar()
+    
     const pages = document.querySelectorAll('.page');
     const cover = document.querySelector('.cover');
     const btnOpen = document.getElementById('btn-open');
+    const link = document.getElementById('link'); // Pastikan Anda memiliki elemen dengan ID 'link'
     let currentPage = 0;
+
+    
 
     function showPage(index) {
         pages.forEach((page, i) => {
@@ -51,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     btnOpen.addEventListener('click', function () {
-        teksbottom.style.opacity= 1;
+        teksbottom.style.opacity = 1;
         playlagu();
         playvideo();
         document.querySelector('.head').style.transform = 'translate(0,0)';
@@ -60,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
             cover.style.display = 'none';
             showPage(currentPage);
             document.body.addEventListener('click', nextPage);
-        }, 500); // Duration matches the transition duration in CSS
+        }, 1000); // Duration matches the transition duration in CSS
     });
 
     function nextPage() {
@@ -69,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
             showPage(currentPage);
             if (currentPage === pages.length - 1) {
                 document.body.removeEventListener('click', nextPage);
-                link.style.display = 'block';
+                link.style.display = 'block'; // Show the link when reaching the last page
                 document.body.addEventListener('click', refreshPage);
             }
         }
@@ -77,8 +81,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function refreshPage() {
         setTimeout(() => {
-            location.reload();
-             // Refresh the browser when the last page is clicked
+            location.reload(); // Refresh the browser when the last page is clicked
         }, 500); // Add a small delay for the transition
     }
+
+    // Cobalah masuk ke mode layar penuh saat halaman dimuat
+    document.addEventListener('click', function initFullscreen() {
+        fullLayar();
+        document.removeEventListener('click', initFullscreen);
+    });
 });
